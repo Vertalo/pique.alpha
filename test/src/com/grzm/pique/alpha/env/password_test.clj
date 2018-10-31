@@ -55,11 +55,13 @@
                                  "*:*:*:me:some-pass"
                                  "*:*:*:me:abc\\\\d"
                                  "localhost:5432:mydb:someone:abcd\\\\"
+                                 "localhost:5432:mydb:someone:abcd\\"
                                  "localhost:5432:mydb:someone:ab\\:cd"])]
     (is (= [{:host "localhost" :port "*" :dbname "*" :user "me" :password nil}
             {:host "some-host" :port "5432" :dbname "*" :user "some-user" :password nil}
             {:host "*" :port "*" :dbname "*" :user "me" :password "some-pass"}
             {:host "*" :port "*" :dbname "*" :user "me" :password "abc\\d"}
+            {:host "localhost" :port "5432" :dbname "mydb" :user "someone" :password "abcd\\"}
             {:host "localhost" :port "5432" :dbname "mydb" :user "someone" :password "abcd\\"}
             {:host "localhost" :port "5432" :dbname "mydb" :user "someone" :password "ab:cd"}]
            (password/parse-passwords contents)))))

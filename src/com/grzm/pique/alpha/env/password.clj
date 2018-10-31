@@ -4,7 +4,7 @@
 
 (def field-separator #"(?<!\\):")
 
-(defn unescape [s] (str/replace s #"\\(.?)" "$1"))
+(defn unescape [s] (str/replace s #"\\(.)" "$1"))
 
 (defn parse-line
   [line]
