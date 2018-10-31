@@ -1,10 +1,10 @@
 (def project 'com.grzm/pique.alpha)
 (def version "0.1.6")
 
-(set-env! :resource-paths #{"resources" "src" "test/resources"}
-          :source-paths   #{"test/src"}
+(set-env! :resource-paths #{"test/resources"}
+          :source-paths   #{"src" "test/src"}
           :dependencies   '[[adzerk/boot-test "RELEASE" :scope "test"]
-                            [com.grzm/tespresso.alpha "0.1.3"]
+                            [com.grzm/tespresso.alpha "0.1.11"]
                             [metosin/boot-alt-test "0.3.2" :scope "test"]
                             [org.clojure/clojure "RELEASE"]
                             [org.clojure/spec.alpha "0.1.123" :scope "test"]

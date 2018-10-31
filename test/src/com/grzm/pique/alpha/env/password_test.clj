@@ -52,10 +52,14 @@
 (deftest parses-passwords-test
   (let [contents (str/join "\n" ["localhost:*:*:me:"
                                  "some-host:5432:*:some-user:"
-                                 "*:*:*:me:some-pass"])]
+                                 "*:*:*:me:some-pass"
+                                 "*:*:*:me:abc\\\\d"
+                                 "localhost:5432:mydb:someone:abcd\\\\"])]
     (is (= [{:host "localhost" :port "*" :dbname "*" :user "me" :password nil}
             {:host "some-host" :port "5432" :dbname "*" :user "some-user" :password nil}
-            {:host "*" :port "*" :dbname "*" :user "me" :password "some-pass"}]
+            {:host "*" :port "*" :dbname "*" :user "me" :password "some-pass"}
+            {:host "*" :port "*" :dbname "*" :user "me" :password "abc\\d"}
+            {:host "localhost" :port "5432" :dbname "mydb" :user "someone" :password "abcd\\"}]
            (password/parse-passwords contents)))))
 
 (deftest bad-line-throws

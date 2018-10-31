@@ -4,10 +4,12 @@
 
 (def field-separator #"(?<!\\):")
 
+(defn unescape [s] (str/replace s #"\\(.?)" "$1"))
+
 (defn parse-line
   [line]
-  (let [[host port dbname user password :as entry] (str/split line
-                                                              field-separator)]
+  (let [[host port dbname user password :as entry] (map unescape (str/split line
+                                                                            field-separator))]
     (when-not (<= 4 (count entry) 5)
       (throw (ex-info "invalid line" {:line line, :cause ::invalid-line})))
     {:host host, :port port, :dbname dbname, :user user, :password password}))
