@@ -49,7 +49,7 @@
 
 (defn create-temp-password-file [contents perms]
   (let [file (File/createTempFile "pique.env.test-" ".pgpass"
-                                  (io/file (str (temp-dir))))]
+                                  nil)]
     (.deleteOnExit file)
     (spit file contents)
     (set-perms (.toPath file) perms)
